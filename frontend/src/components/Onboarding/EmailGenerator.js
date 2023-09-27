@@ -8,7 +8,7 @@ const apiName = 'plaidapi';
 
 export default function EmailGenerator({ plaidRequired, plaidUserToken, covieRequired, coviePolicies, sendEmail, emailSent, setEmailSent }) {
   // State to track request variables.
-  const [emailRequest, setEmailRequest] = useState(true);
+  const [setEmailRequest] = useState(true);
 
   // Get the user email.
   const { user } = useAuthenticator((context) => [context.user]);
@@ -16,10 +16,10 @@ export default function EmailGenerator({ plaidRequired, plaidUserToken, covieReq
 
   // When the form is submitted, open the link.
   useEffect(() => {
-    if (sendEmail && emailRequest) {
+    if (sendEmail) {
       sendEmailRequest();
     }
-  }, [emailRequest]);
+  }, [sendEmail]);
 
   // Sends the POST request to generate the email.
   const sendEmailRequest = async () => {
@@ -42,7 +42,7 @@ export default function EmailGenerator({ plaidRequired, plaidUserToken, covieReq
     } catch (err) {
       logger.error('Unable to create link token:', err);
     }
-    setEmailRequest(false);
+    setSendEmail(false);
     setEmailSent(true);
   };
 

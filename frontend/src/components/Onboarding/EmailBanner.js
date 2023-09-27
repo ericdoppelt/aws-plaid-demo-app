@@ -26,7 +26,7 @@ export default function EmailBanner({email}) {
             </IconButton>
           }
           sx={{ mb: 2 }}
-          severity="info"
+          severity="setSendEmail"
         >
         <AlertTitle>Email sent successfully!</AlertTitle>
           Please review the information sent to {email}.
