@@ -13,7 +13,7 @@ Amplify.Logger.LOG_LEVEL = 'DEBUG';
 
 // Try to dynamically import aws-exports
 try {
-  import('./aws-exports').then((awsconfig) => {
+    import('./aws-exports').then((awsconfig) => {
     // If aws-exports.js is available
     Amplify.configure(awsconfig.default);
     root.render(<App />);

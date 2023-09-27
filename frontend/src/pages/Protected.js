@@ -79,7 +79,8 @@ export default function Protected() {
         covieRequired={covieRequired}
         coviePolicies={coviePolicies}
         sendEmail={sendEmail}
-        emailSent={setEmailSent}
+        setSendEmail={setSendEmail}
+        emailSent={emailSent}
         setEmailSent={setEmailSent}
       />
     </Flex>
