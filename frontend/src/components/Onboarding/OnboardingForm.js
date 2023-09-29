@@ -30,13 +30,13 @@ export default function OnboardingForm({
 
   const handleFormSubmission = () => {
     setOpen(false);
-    setFormSubmitted(true);
     if (plaidToggle) {
       setPlaidRequired(true);
     }
     if (covieToggle) {
       setCovieRequired(true);
     }
+    setFormSubmitted(true);
   };
 
   // For now, there is no health data.
