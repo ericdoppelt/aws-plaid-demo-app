@@ -3,8 +3,12 @@ import { Flex } from '@aws-amplify/ui-react';
 import OnboardingForm from './OnboardingForm';
 import OnboardingLink from './OnboardingLink';
 import EmailGenerator from './EmailGenerator';
+import FormGeneratorButton from './FormGeneratorButton';
 
 export default function OnboardingFlow() {
+
+  // State used to manipulate the form generation button.
+  const [showButton, setShowButton] = useState(true);
 
   // State associated with form building.
   const [formOpen, setFormOpen] = useState(true);
@@ -46,8 +50,13 @@ export default function OnboardingFlow() {
   const [coviePolicies, setCoviePolicies] = useState(false);
   const [covieRequired, setCovieRequired] = useState(false);
 
-  return (
-    <Flex direction="column">
+  if (showButton) {
+    return <FormGeneratorButton
+        setShowButton={setShowButton}
+        setFormOpen={setFormOpen}
+    />
+  } else if (formOpen) {
+    return (
       <OnboardingForm
         plaidToggle={plaidToggle}
         setPlaidToggle={setPlaidToggle}
@@ -60,22 +69,24 @@ export default function OnboardingFlow() {
         formSubmitted={formSubmitted}
         setFormSubmitted={setFormSubmitted}
       />
-
-      <OnboardingLink
-        linkOpen={linkOpen}
-        setLinkOpen={setLinkOpen}
-        plaidToggle={plaidToggle}
-        setPlaidToggle={setPlaidToggle}
-        plaidNumber={plaidNumber}
-        setPlaidNumber={setPlaidNumber}
-        plaidUserToken={plaidUserToken}
-        setPlaidUserToken={setPlaidUserToken}
-        covieToggle={covieToggle}
-        setCovieToggle={setCovieToggle}
-        setCoviePolicies={setCoviePolicies}
-        setLinkFinished={setLinkFinished}
-      />
-
+    );
+  } else if (linkOpen) {
+    <OnboardingLink
+      linkOpen={linkOpen}
+      setLinkOpen={setLinkOpen}
+      plaidToggle={plaidToggle}
+      setPlaidToggle={setPlaidToggle}
+      plaidNumber={plaidNumber}
+      setPlaidNumber={setPlaidNumber}
+      plaidUserToken={plaidUserToken}
+      setPlaidUserToken={setPlaidUserToken}
+      covieToggle={covieToggle}
+      setCovieToggle={setCovieToggle}
+      setCoviePolicies={setCoviePolicies}
+      setLinkFinished={setLinkFinished}
+    />;
+  } else {
+    return (
       <EmailGenerator
         plaidRequired={plaidRequired}
         plaidUserToken={plaidUserToken}
@@ -86,6 +97,6 @@ export default function OnboardingFlow() {
         emailSent={emailSent}
         setEmailSent={setEmailSent}
       />
-    </Flex>
-  );
+    );
+  }
 }
