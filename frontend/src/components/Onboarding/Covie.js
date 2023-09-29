@@ -6,13 +6,13 @@ const apiName = 'plaidapi';
 
 export default function Covie({ setCovieToggle, setCoviePolicies }) {
 
-  // State to track Covie variables.
-  const [linkId, setLinkId] = useState(null);
-  const [policyRequest, setPolicyRequest] = useState(false);
-
   const handleLinkSuccess = (linkId, policies) => {
-    setLinkId(linkId);
+    console.log('a')
     setCoviePolicies(policies);
+  };
+
+  const handleClose = () => {
+    console.log('b')
     setCovieToggle(false);
   };
 
@@ -20,8 +20,8 @@ export default function Covie({ setCovieToggle, setCoviePolicies }) {
   useEffect(() => {
     window.Covie.access.init({
       integrationKey: 'ik_tgvz5zp57bq5jrij',
-      metadata: {},
       onSuccess: handleLinkSuccess,
+      onClose: handleClose
     });
   }, []);
 
