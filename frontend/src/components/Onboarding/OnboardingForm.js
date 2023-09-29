@@ -19,15 +19,10 @@ export default function OnboardingForm({
   covieToggle,
   setCovieToggle,
   setCovieRequired,
-  formSubmitted,
   setFormSubmitted,
 }) {
   // Displays whether the onboarding form is visible.
-  const [open, setOpen] = useState(false);
-
-  const handleFormGeneration = () => {
-    setOpen(true);
-  };
+  const [open, setOpen] = useState(true);
 
   const handleFormCancelation = () => {
     setOpen(false);
@@ -71,35 +66,24 @@ export default function OnboardingForm({
     return <Switch checked={covieToggle} onChange={(event) => setCovieToggle(event.target.checked)} />;
   };
 
-  if (formSubmitted) {
-    return null;
-  } else {
-    return !open ? (
-      // If the dialogue is closed, show the button.
-      <Button variant="outlined" onClick={handleFormGeneration}>
-        Generate Onboarding Form
-      </Button>
-    ) : (
-      // Otherwise, show the dialogue.
-      <Dialog open={open} onClose={handleFormSubmission}>
-        <DialogTitle>Generate Claimant Form!</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Please note the information that you would like to pull for the claimant.
-          </DialogContentText>
-          <FormGroup>
-            <FormControlLabel control={getHealthDataSwitch()} label="Health Data" />
-            <FormControlLabel control={getPlaidSwitch()} label="Employment Data" />
-            {/* Only render the # input if the toggle is checked for Plaid. */}
-            {plaidToggle ? <FormControlLabel control={getPlaidNumberInput()} /> : null}
-            <FormControlLabel control={getCovieSwitch()} label="Auto Insurance Data" />
-          </FormGroup>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleFormCancelation}>Cancel</Button>
-          <Button onClick={handleFormSubmission}>Generate</Button>
-        </DialogActions>
-      </Dialog>
-    );
-  }
+  return (
+    // Otherwise, show the dialogue.
+    <Dialog open={open} onClose={handleFormSubmission}>
+      <DialogTitle>Generate Claimant Form!</DialogTitle>
+      <DialogContent>
+        <DialogContentText>Please note the information that you would like to pull for the claimant.</DialogContentText>
+        <FormGroup>
+          <FormControlLabel control={getHealthDataSwitch()} label="Health Data" />
+          <FormControlLabel control={getPlaidSwitch()} label="Employment Data" />
+          {/* Only render the # input if the toggle is checked for Plaid. */}
+          {plaidToggle ? <FormControlLabel control={getPlaidNumberInput()} /> : null}
+          <FormControlLabel control={getCovieSwitch()} label="Auto Insurance Data" />
+        </FormGroup>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleFormCancelation}>Cancel</Button>
+        <Button onClick={handleFormSubmission}>Generate</Button>
+      </DialogActions>
+    </Dialog>
+  );
 }

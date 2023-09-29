@@ -6,7 +6,6 @@ import EmailGenerator from './EmailGenerator';
 import FormGeneratorButton from './FormGeneratorButton';
 
 export default function OnboardingFlow() {
-
   // State used to manipulate the form generation button.
   const [showButton, setShowButton] = useState(true);
 
@@ -51,10 +50,7 @@ export default function OnboardingFlow() {
   const [covieRequired, setCovieRequired] = useState(false);
 
   if (showButton) {
-    return <FormGeneratorButton
-        setShowButton={setShowButton}
-        setFormOpen={setFormOpen}
-    />
+    return <FormGeneratorButton setShowButton={setShowButton} setFormOpen={setFormOpen} />;
   } else if (formOpen) {
     return (
       <OnboardingForm
@@ -66,7 +62,6 @@ export default function OnboardingFlow() {
         covieToggle={covieToggle}
         setCovieToggle={setCovieToggle}
         setCovieRequired={setCovieRequired}
-        formSubmitted={formSubmitted}
         setFormSubmitted={setFormSubmitted}
       />
     );

@@ -1,18 +1,17 @@
-import { useEffect, useState } from 'react';
-import { API, Logger } from 'aws-amplify';
+import { useEffect } from 'react';
+import { Logger } from 'aws-amplify';
 
-const logger = new Logger('Covie');
-const apiName = 'plaidapi';
+const logger = new Logger('Plaid');
 
 export default function Covie({ setCovieToggle, setCoviePolicies }) {
 
   const handleLinkSuccess = (linkId, policies) => {
-    console.log('a')
+    logger.info('a');
     setCoviePolicies(policies);
   };
 
   const handleClose = () => {
-    console.log('b')
+    logger.info('b');
     setCovieToggle(false);
   };
 
@@ -25,6 +24,6 @@ export default function Covie({ setCovieToggle, setCoviePolicies }) {
     });
   }, []);
 
-  console.log('c')
+  logger.log('c')
   return null;
 }

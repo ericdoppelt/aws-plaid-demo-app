@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useState } from 'react';
 
 import Plaid from './Plaid';
 import Covie from './Covie';
