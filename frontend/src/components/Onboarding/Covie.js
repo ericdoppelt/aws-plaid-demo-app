@@ -25,5 +25,6 @@ export default function Covie({ setCovieToggle, setCoviePolicies }) {
     });
   }, []);
 
+  console.log('c')
   return null;
 }
