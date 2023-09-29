@@ -9,7 +9,7 @@ export default function OnboardingFlow() {
   const [showButton, setShowButton] = useState(true);
 
   // State associated with form building.
-  const [formOpen, setFormOpen] = useState(true);
+  const [formOpen, setFormOpen] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   // State associated wtih link handling.
@@ -30,6 +30,7 @@ export default function OnboardingFlow() {
     if (formSubmitted) {
       setLinkOpen(true);
       setFormSubmitted(false);
+      setFormOpen(false);
     }
   }, [formSubmitted]);
 
@@ -62,6 +63,7 @@ export default function OnboardingFlow() {
         setCovieToggle={setCovieToggle}
         setCovieRequired={setCovieRequired}
         setFormSubmitted={setFormSubmitted}
+        setShowButton={setShowButton}
       />
     );
   } else if (linkOpen) {

@@ -20,12 +20,14 @@ export default function OnboardingForm({
   setCovieToggle,
   setCovieRequired,
   setFormSubmitted,
+  setShowButton
 }) {
   // Displays whether the onboarding form is visible.
   const [open, setOpen] = useState(true);
 
   const handleFormCancelation = () => {
     setOpen(false);
+    setShowButton(true);
   };
 
   const handleFormSubmission = () => {
@@ -68,7 +70,7 @@ export default function OnboardingForm({
 
   return (
     // Otherwise, show the dialogue.
-    <Dialog open={open} onClose={handleFormSubmission}>
+    <Dialog open={open} onClose={handleFormCancelation}>
       <DialogTitle>Generate Claimant Form!</DialogTitle>
       <DialogContent>
         <DialogContentText>Please note the information that you would like to pull for the claimant.</DialogContentText>
