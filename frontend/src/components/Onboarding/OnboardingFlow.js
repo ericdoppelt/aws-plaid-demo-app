@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Flex } from '@aws-amplify/ui-react';
 import OnboardingForm from './OnboardingForm';
 import OnboardingLink from './OnboardingLink';
 import EmailGenerator from './EmailGenerator';
@@ -30,7 +29,7 @@ export default function OnboardingFlow() {
   useEffect(() => {
     if (formSubmitted) {
       setLinkOpen(true);
-      setFormSubmitted(true);
+      setFormSubmitted(false);
     }
   }, [formSubmitted]);
 
