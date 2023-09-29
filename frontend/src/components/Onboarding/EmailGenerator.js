@@ -7,9 +7,7 @@ const logger = new Logger('Plaid');
 const apiName = 'plaidapi';
 
 export default function EmailGenerator({ plaidRequired, plaidUserToken, covieRequired, coviePolicies, sendEmail, setSendEmail, emailSent, setEmailSent }) {
-  // State to track request variables.
-  const [setEmailRequest] = useState(true);
-
+  
   // Get the user email.
   const { user } = useAuthenticator((context) => [context.user]);
   const email = user.signInUserSession.idToken.payload.email;
