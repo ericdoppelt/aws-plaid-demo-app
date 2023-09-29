@@ -34,7 +34,7 @@ export default function EmailGenerator({ plaidRequired, plaidUserToken, covieReq
       requestBody['coviePolicies'] = coviePolicies;
     }
     try {
-      const res = await API.get(apiName, '/v1/tokens/send-email', {
+      const res = await API.post(apiName, '/v1/tokens/send-email', {
         body: requestBody,
       });
       logger.debug('POST /v1/tokens/send-email response:', res);

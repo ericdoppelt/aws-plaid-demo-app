@@ -6,14 +6,17 @@ import OnboardingLink from '../components/Onboarding/OnboardingLink';
 import EmailGenerator from '../components/Onboarding/EmailGenerator';
 
 export default function Protected() {
+
   // State associated with form building.
-  const [formSubmitted, setFormSubmitted] = useState(false);
   const [formOpen, setFormOpen] = useState(true);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   // State associated wtih link handling.
   const [linkOpen, setLinkOpen] = useState(false);
+  const [linkFinished, setLinkFinished] = useState(false);
+
   // State associated with email sending.
-  const [sendEmail, setSendEmail] = useState(false);
+  const [triggerEmailSend, setTriggerEmailSend] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
 
   // State shared between form building and read by link handling.
@@ -25,16 +28,16 @@ export default function Protected() {
   useEffect(() => {
     if (formSubmitted) {
       setLinkOpen(true);
-      setFormSubmitted(false);
+      setFormSubmitted(true);
     }
   }, [formSubmitted]);
 
   // When the form is submitted, open the link.
   useEffect(() => {
-    if (formSubmitted && !linkOpen) {
-      setSendEmail(true);
+    if (formSubmitted && linkFinished) {
+      setTriggerEmailSend(true);
     }
-  }, [formSubmitted, linkOpen]);
+  }, [formSubmitted, linkFinished]);
 
   // State needed to generate the Plaid email.
   const [plaidUserToken, setPlaidUserToken] = useState(null);
@@ -71,6 +74,7 @@ export default function Protected() {
         covieToggle={covieToggle}
         setCovieToggle={setCovieToggle}
         setCoviePolicies={setCoviePolicies}
+        setLinkFinished={setLinkFinished}
       />
 
       <EmailGenerator
@@ -78,8 +82,8 @@ export default function Protected() {
         plaidUserToken={plaidUserToken}
         covieRequired={covieRequired}
         coviePolicies={coviePolicies}
-        sendEmail={sendEmail}
-        setSendEmail={setSendEmail}
+        sendEmail={triggerEmailSend}
+        setSendEmail={setTriggerEmailSend}
         emailSent={emailSent}
         setEmailSent={setEmailSent}
       />
