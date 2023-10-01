@@ -45,7 +45,7 @@ export default function OnboardingFlow() {
   const [plaidUserToken, setPlaidUserToken] = useState(null);
   const [plaidRequired, setPlaidRequired] = useState(false);
 
-  // State needed to generate the Plaid email.
+  // State needed to generate the Covie email.
   const [coviePolicies, setCoviePolicies] = useState(false);
   const [covieRequired, setCovieRequired] = useState(false);
 
