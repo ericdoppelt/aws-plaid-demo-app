@@ -64,7 +64,7 @@ export default function OnboardingFlow() {
         covieEnabled={covieEnabled}
         setCovieEnabled={setCovieEnabled}
         setCoviePolicies={setCoviePolicies}
-        onClose={() => setCurrentOnboardingStep(OnboardingSteps.Button)}
+        onClose={() => setCurrentOnboardingStep(OnboardingSteps.Email)}
         onSuccess={() => setCurrentOnboardingStep(OnboardingSteps.Email)}
       />
     ),
