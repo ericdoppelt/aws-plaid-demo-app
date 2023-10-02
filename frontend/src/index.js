@@ -15,6 +15,19 @@ Amplify.Logger.LOG_LEVEL = 'DEBUG';
 var configuration;
 try {
   configuration = require('./aws-exports').default;
+  configuration['API'] = {
+    endpoints: [
+      {
+        name: 'plaidapi',
+        endpoint: 'https://main.d182905k7wg12.amplifyapp.com',
+        region: process.env.REACT_APP_REGION,
+        clientId: process.env.REACT_APP_COGNITO_CLIENT_ID,
+        custom_header: async () => {
+          return { Authorization: `Bearer ${(await Auth.currentSession()).getAccessToken().getJwtToken()}` };
+        },
+      },
+    ],
+  };
 } catch (err) {
   // If aws-exports.js is NOT available, use the old settings
   configuration = {

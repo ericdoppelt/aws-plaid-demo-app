@@ -53,5 +53,5 @@ export default function EmailGenerator({
     setShowBanner(true);
   };
 
-  return showBanner ? <EmailBanner email={email} /> : null;
+  return showBanner ? <EmailBanner email={email} /> : <div/>;
 }
