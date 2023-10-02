@@ -53,7 +53,6 @@ export default function OnboardingLink({
       <Covie
         setCovieToggle={setCovieEnabled}
         setCoviePolicies={setCoviePolicies}
-        onClose={onClose}
         onSuccess={onSuccess}
       />
     ),

@@ -10,7 +10,6 @@ export default function Covie({ setCoviePolicies, onSuccess, onClose }) {
     window.Covie.access.init({
       integrationKey: 'ik_tgvz5zp57bq5jrij',
       onSuccess: onSuccess,
-      onClose: onClose
     });
   }, []);
 
