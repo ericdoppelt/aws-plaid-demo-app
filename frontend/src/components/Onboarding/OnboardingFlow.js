@@ -20,7 +20,7 @@ export default function OnboardingFlow() {
     Email: 'Email',
   };
 
-  const [currentOnboardingStep, setCurrentOnboardingStep] = useState(OnboardingSteps.Email);
+  const [currentOnboardingStep, setCurrentOnboardingStep] = useState(OnboardingSteps.Button);
 
   /**
    * The Plaid integration is determined by a few variables:

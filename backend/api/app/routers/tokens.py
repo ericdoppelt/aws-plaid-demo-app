@@ -276,11 +276,11 @@ def post_send_email() -> Dict[str, str]:
     logger.append_keys(user_id=user_id)
     tracer.put_annotation(key="UserId", value=user_id)
 
-    plaidUserToken: Union[None, str] = router.current_event.json_body.get(
-        "plaidUserToken")
+    plaid_user_token: Union[None, str] = router.current_event.json_body.get(
+        "plaid_user_token")
 
-    coviePolicies: Union[None, str] = router.current_event.json_body.get(
-        "coviePolicies")
+    covie_policies: Union[None, str] = router.current_event.json_body.get(
+        "covie_policies")
 
     return {
         "success": True,
