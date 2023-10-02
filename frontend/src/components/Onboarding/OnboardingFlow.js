@@ -1,98 +1,82 @@
 import { useState, useEffect } from 'react';
-import OnboardingForm from './OnboardingForm';
-import OnboardingLink from './OnboardingLink';
-import EmailGenerator from './EmailGenerator';
-import FormGeneratorButton from './FormGeneratorButton';
+import OnboardingForm from './Steps/OnboardingForm';
+import OnboardingLink from './Steps/OnboardingLink';
+import OnboardingEmail from './Steps/OnboardingEmail';
+import OnboardingButton from './Steps/OnboardingButton';
 
 export default function OnboardingFlow() {
-  // State used to manipulate the form generation button.
-  const [showButton, setShowButton] = useState(true);
+  /**
+   * There are four steps during the onboarding flow.
+   * 1) The user clicks a button to open the form.
+   * 2) The user fills out a form.
+   * 3) A unified link apapears.
+   * 4) An email gets sent with the data, and a banner gets shown.
+   */
 
-  // State associated with form building.
-  const [formOpen, setFormOpen] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const OnboardingSteps = {
+    Button: 'Button',
+    Form: 'Form',
+    Link: 'Link',
+    Email: 'Email',
+  };
 
-  // State associated wtih link handling.
-  const [linkOpen, setLinkOpen] = useState(false);
-  const [linkFinished, setLinkFinished] = useState(false);
+  const [currentOnboardingStep, setCurrentOnboardingStep] = useState(OnboardingSteps.Button);
 
-  // State associated with email sending.
-  const [sendEmail, setSendEmail] = useState(false);
-  const [emailSent, setEmailSent] = useState(false);
-
-  // State shared between form building and read by link handling.
-  const [plaidToggle, setPlaidToggle] = useState(true);
-  const [plaidNumber, setPlaidNumber] = useState(1);
-  const [covieToggle, setCovieToggle] = useState(true);
-
-  // When the form is submitted, open the link.
-  useEffect(() => {
-    if (formSubmitted) {
-      setLinkOpen(true);
-      setFormSubmitted(false);
-      setFormOpen(false);
-    }
-  }, [formSubmitted]);
-
-  // When the form is submitted, open the link.
-  useEffect(() => {
-    if (formSubmitted && linkFinished) {
-      setSendEmail(true);
-    }
-  }, [formSubmitted, linkFinished]);
-
-  // State needed to generate the Plaid email.
+  /**
+   * The Plaid integration is determined by a few variables:
+   *   plaidEnabled: Whether or not the user wants financial data.
+   *   plaidNumConnections: The # of jobs to grab data for.
+   *   plaidUserToken: The token associated with the generated data.
+   */
+  const [plaidEnabled, setPlaidEnabled] = useState(true);
+  const [plaidNumConnections, setPlaidNumConnections] = useState(1);
   const [plaidUserToken, setPlaidUserToken] = useState(null);
-  const [plaidRequired, setPlaidRequired] = useState(false);
 
-  // State needed to generate the Covie email.
-  const [coviePolicies, setCoviePolicies] = useState(false);
-  const [covieRequired, setCovieRequired] = useState(false);
+  /**
+   * The Covie integration is determined by a few variables:
+   *   covieEnabled: Whether or not the user wants auto insurance data.
+   *   coviePolicies: The insurance policy data generatd by the link.
+   */
+  const [covieEnabled, setCovieEnabled] = useState(true);
+  const [coviePolicies, setCoviePolicies] = useState([]);
 
-  if (showButton) {
-    return <FormGeneratorButton setShowButton={setShowButton} setFormOpen={setFormOpen} />;
-  } else if (formOpen) {
-    return (
+  // Define the four components needed for each step in the process.
+  const FlowComponents = {
+    Button: <OnboardingButton onClick={() => setCurrentOnboardingStep(OnboardingSteps.Form)} />,
+    Form: (
       <OnboardingForm
-        plaidToggle={plaidToggle}
-        setPlaidToggle={setPlaidToggle}
-        plaidNumber={plaidNumber}
-        setPlaidNumber={setPlaidNumber}
-        setPlaidRequired={setPlaidRequired}
-        covieToggle={covieToggle}
-        setCovieToggle={setCovieToggle}
-        setCovieRequired={setCovieRequired}
-        setFormSubmitted={setFormSubmitted}
-        setShowButton={setShowButton}
+        plaidEnabled={plaidEnabled}
+        setPlaidEnabled={setPlaidEnabled}
+        plaidNumConnections={plaidNumConnections}
+        setPlaidNumConnections={setPlaidNumConnections}
+        covieEnabled={covieEnabled}
+        setCovieEnabled={setCovieEnabled}
+        onClose={() => setCurrentOnboardingStep(OnboardingSteps.Button)}
+        onSuccess={() => setCurrentOnboardingStep(OnboardingSteps.Link)}
       />
-    );
-  } else if (linkOpen) {
-    <OnboardingLink
-      linkOpen={linkOpen}
-      setLinkOpen={setLinkOpen}
-      plaidToggle={plaidToggle}
-      setPlaidToggle={setPlaidToggle}
-      plaidNumber={plaidNumber}
-      setPlaidNumber={setPlaidNumber}
-      plaidUserToken={plaidUserToken}
-      setPlaidUserToken={setPlaidUserToken}
-      covieToggle={covieToggle}
-      setCovieToggle={setCovieToggle}
-      setCoviePolicies={setCoviePolicies}
-      setLinkFinished={setLinkFinished}
-    />;
-  } else {
-    return (
-      <EmailGenerator
-        plaidRequired={plaidRequired}
+    ),
+    Link: (
+      <OnboardingLink
+        plaidEnabled={plaidEnabled}
+        plaidNumConnections={plaidNumConnections}
         plaidUserToken={plaidUserToken}
-        covieRequired={covieRequired}
-        coviePolicies={coviePolicies}
-        sendEmail={sendEmail}
-        setSendEmail={setSendEmail}
-        emailSent={emailSent}
-        setEmailSent={setEmailSent}
+        setPlaidUserToken={setPlaidUserToken}
+        covieEnabled={covieEnabled}
+        setCovieEnabled={setCovieEnabled}
+        setCoviePolicies={setCoviePolicies}
+        onClose={() => setCurrentOnboardingStep(OnboardingSteps.Button)}
+        onSuccess={() => setCurrentOnboardingStep(OnboardingSteps.Email)}
       />
-    );
-  }
+    ),
+    Email: (
+      <OnboardingEmail
+        plaidEnabled={plaidEnabled}
+        plaidUserToken={plaidUserToken}
+        covieEnabled={covieEnabled}
+        coviePolicies={coviePolicies}
+      />
+    ),
+  };
+
+  return FlowComponents[currentOnboardingStep];
 }

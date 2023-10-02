@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { usePlaidLink } from 'react-plaid-link';
 
-export default function PlaidLink({ token, onSuccess, onExit }) {
+export default function PlaidLink({ token, onSuccess, onClose }) {
   const { open, ready, error } = usePlaidLink({
     token,
     onSuccess,
-    onExit,
+    onClose,
   });
 
   useEffect(() => {

@@ -1,23 +1,31 @@
 import { useEffect, useState } from 'react';
 import { API, Logger } from 'aws-amplify';
 import { useAuthenticator } from '@aws-amplify/ui-react';
-import EmailBanner from './EmailBanner';
+import EmailBanner from '../Components/EmailBanner';
 
 const logger = new Logger('Plaid');
 const apiName = 'plaidapi';
 
-export default function EmailGenerator({ plaidRequired, plaidUserToken, covieRequired, coviePolicies, sendEmail, setSendEmail, emailSent, setEmailSent }) {
-  
-  // Get the user email.
+export default function EmailGenerator({
+  plaidEnabled,
+  plaidUserToken,
+  covieEnabled,
+  coviePolicies,
+}) {
+
+  // TODO: This should be set once on render, and then stored in state.
   const { user } = useAuthenticator((context) => [context.user]);
   const email = user.signInUserSession.idToken.payload.email;
+  
+  const [emailRequest, setEmailRequest] = useState(true);
+  const [showBanner, setShowBanner] = useState(false);
 
   // When the form is submitted, open the link.
   useEffect(() => {
-    if (sendEmail) {
+    if (emailRequest) {
       sendEmailRequest();
     }
-  }, [sendEmail]);
+  }, [emailRequest]);
 
   // Sends the POST request to generate the email.
   const sendEmailRequest = async () => {
@@ -25,12 +33,13 @@ export default function EmailGenerator({ plaidRequired, plaidUserToken, covieReq
     var requestBody = {
       email: email,
     };
-    if (plaidRequired) {
-      requestBody['plaidUserToken'] = plaidUserToken;
+    if (plaidEnabled) {
+      requestBody['plaid_user_token'] = plaidUserToken;
     }
-    if (covieRequired) {
-      requestBody['coviePolicies'] = coviePolicies;
+    if (covieEnabled) {
+      requestBody['covie_policies'] = coviePolicies;
     }
+
     try {
       const res = await API.post(apiName, '/v1/tokens/send-email', {
         body: requestBody,
@@ -40,9 +49,9 @@ export default function EmailGenerator({ plaidRequired, plaidUserToken, covieReq
     } catch (err) {
       logger.error('Unable to create link token:', err);
     }
-    setSendEmail(false);
-    setEmailSent(true);
+    setEmailRequest(false);
+    setShowBanner(true);
   };
 
-  return emailSent ? <EmailBanner email={email} /> : null;
+  return showBanner ? <EmailBanner email={email} /> : null;
 }
