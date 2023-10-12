@@ -2,6 +2,7 @@ import { Authenticator } from '@aws-amplify/ui-react';
 import { useAuthenticator, View } from '@aws-amplify/ui-react';
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router';
+import './Login.css'
 
 export default function Login() {
   const { route } = useAuthenticator((context) => [context.route]);
@@ -31,6 +32,28 @@ export default function Login() {
   useEffect(() => {
     if (route === 'authenticated') {
       navigate(from, { replace: true });
+    }
+
+    // ---- Change Amplify's Built-In Functionality ----
+    //
+    // Change Email component's Help text
+    const injectedEmailInput = document.querySelector('input[name="username"]');
+    if (injectedEmailInput) {
+      injectedEmailInput.placeholder = 'Email Address';
+
+      // Check if hint text is already added
+      if (!injectedEmailInput.nextElementSibling || injectedEmailInput.nextElementSibling.textContent !== 'Enter your email address') {
+        // Add Hint Below Email Input
+        const hintText = document.createElement('p');
+        hintText.classList.add('hint-text');
+        hintText.textContent = 'We never share your email with anyone else.';
+
+        // Find the parent of injectedEmailInput and insert hintText after it
+        const parent = injectedEmailInput.parentElement;
+        if (parent) {
+          parent.appendChild(hintText);
+        }
+      }
     }
   }, [route, navigate, from]);
 

@@ -16,17 +16,9 @@ export default function Layout() {
   }
   return (
     <>
-      <nav>
-        <Button onClick={() => navigate('/')}>Home</Button>
-        {route !== 'authenticated' ? (
-          <Button onClick={() => navigate('/login')}>Login</Button>
-        ) : (
-          <Button onClick={() => logOut()}>Logout</Button>
-        )}
-      </nav>
-      <Heading level={2}>CaseSwift</Heading>
+      <img className='caseswift-logo' src={process.env.PUBLIC_URL + '/assets/images/fullLogo.png'} alt="CaseSwift Logo" />
       <View>
-        {route === 'authenticated' ? `Welcome ${user.signInUserSession.idToken.payload.email}` : 'Please Login!'}
+        {route === 'authenticated' ? `Welcome ${user.signInUserSession.idToken.payload.email}` : <Heading level={2}>Login</Heading>}
       </View>
 
       <Outlet />
