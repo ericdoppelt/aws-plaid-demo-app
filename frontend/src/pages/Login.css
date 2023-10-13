@@ -25,6 +25,10 @@ button.amplify-button[type="submit"] {
   width: 100vw;
 }
 
+div.amplify-flex.amplify-field-group.amplify-field-group--horizontal {
+  margin: 0 10% 0 10%;
+}
+
 input.amplify-input {
   text-align: left;
   padding-left: 0;
