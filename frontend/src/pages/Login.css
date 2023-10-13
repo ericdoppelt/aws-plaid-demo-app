@@ -5,6 +5,11 @@
   --amplify-components-authenticator-router-box-shadow: none;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+}
+
 #root > div.auth-wrapper > div {
   box-sizing: unset;
   --amplify-border-widths-large: 0px;
