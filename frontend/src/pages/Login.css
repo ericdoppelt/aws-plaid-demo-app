@@ -2,6 +2,7 @@
   --amplify-components-tabs-item-active-border-color: #4c97f3;
   --amplify-components-tabs-item-active-color: #4c97f3;
   --amplify-components-fieldcontrol-focus-border-color: white;
+  --amplify-components-authenticator-router-box-shadow: none;
 }
 
 #root > div.auth-wrapper > div {
@@ -48,4 +49,18 @@ button.amplify-button[aria-label="Show password"] {
 
 .caseswift-logo {
   margin-top: 15%;
+}
+
+div[role="tablist"] {
+  width: 100%;
+}
+
+div[role="tablist"] > div.amplify-flex {
+  width: 50%; /* 50% width for the contents */
+  margin: 0 auto; /* Center the contents within the top-level div */
+  border: 1px #dcdee0 solid;
+}
+
+div[data-amplify-container] > div[data-amplify-router]:first-child {
+  border: 0;
 }
