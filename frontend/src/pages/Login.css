@@ -65,8 +65,8 @@ div[role="tablist"] {
 }
 
 div[role="tablist"] > div.amplify-flex {
-  width: 50%; /* 50% width for the contents */
-  margin: 0 auto; /* Center the contents within the top-level div */
+  width: 50%;
+  margin: 0 auto;
   border: 1px #dcdee0 solid;
 }
 
