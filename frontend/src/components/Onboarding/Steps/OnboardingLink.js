@@ -37,7 +37,7 @@ export default function OnboardingLink({
     } else {
       onClose();
     }
-  }, []);
+  }, [LinkSteps.Covie, LinkSteps.Plaid, covieEnabled, onClose, plaidEnabled]);
 
   const LinkComponents = {
     Plaid: (
