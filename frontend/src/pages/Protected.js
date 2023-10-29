@@ -45,7 +45,6 @@ export default function Protected() {
             fontWeight: 700,
             }} 
             variant='h5'>Client Table</Typography>
-          <TextField sx={{ flexGrow: 1 }} id="outlined-basic" label="🔎 Client Name" variant="outlined" />
           <OnboardingFlow />
         </Box>
       </Box>
