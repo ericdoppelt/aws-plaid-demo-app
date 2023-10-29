@@ -110,12 +110,6 @@ export default function MenuDrawer(data) {
                     </ListItem>
                 </List>
             </Drawer>
-            <Box
-                component="main"
-                sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
-            >
-                <OnboardingFlow />
-            </Box>
         </Box>
     );
 }
