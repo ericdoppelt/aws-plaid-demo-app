@@ -12,11 +12,10 @@ export default function EmailGenerator({
   covieEnabled,
   coviePolicies,
 }) {
-
   // TODO: This should be set once on render, and then stored in state.
   const { user } = useAuthenticator((context) => [context.user]);
   const email = user.signInUserSession.idToken.payload.email;
-  
+
   const [emailRequest, setEmailRequest] = useState(true);
   const [showBanner, setShowBanner] = useState(false);
 
@@ -53,5 +52,5 @@ export default function EmailGenerator({
     setShowBanner(true);
   };
 
-  return showBanner ? <EmailBanner email={email} /> : <div/>;
+  return showBanner ? <EmailBanner email={email} /> : <div />;
 }

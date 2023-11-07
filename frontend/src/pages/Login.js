@@ -2,7 +2,7 @@ import { Authenticator } from '@aws-amplify/ui-react';
 import { useAuthenticator, View } from '@aws-amplify/ui-react';
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router';
-import './Login.css'
+import './Login.css';
 
 export default function Login() {
   const { route } = useAuthenticator((context) => [context.route]);
@@ -14,7 +14,7 @@ export default function Login() {
     SignUp: {
       Footer() {
         return (
-          <View textAlign="center">
+          <View textAlign='center'>
             <strong>Password Policy</strong>:
             <ul>
               <li>Minimum of 8 characters</li>
@@ -25,9 +25,9 @@ export default function Login() {
             </ul>
           </View>
         );
-      }
-    }
-  }
+      },
+    },
+  };
 
   useEffect(() => {
     if (route === 'authenticated') {
@@ -42,7 +42,11 @@ export default function Login() {
       injectedEmailInput.placeholder = 'Email Address';
 
       // Check if hint text is already added
-      if (!injectedEmailInput.nextElementSibling || injectedEmailInput.nextElementSibling.textContent !== 'Enter your email address') {
+      if (
+        !injectedEmailInput.nextElementSibling ||
+        injectedEmailInput.nextElementSibling.textContent !==
+          'Enter your email address'
+      ) {
         // Add Hint Below Email Input
         const hintText = document.createElement('p');
         hintText.classList.add('hint-text');
@@ -58,8 +62,8 @@ export default function Login() {
   }, [route, navigate, from]);
 
   return (
-    <View className="auth-wrapper">
-      <Authenticator components={components}/>
+    <View className='auth-wrapper'>
+      <Authenticator components={components} />
     </View>
   );
 }

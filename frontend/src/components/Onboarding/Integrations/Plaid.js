@@ -5,7 +5,12 @@ import PlaidLink from '../Components/PlaidLink';
 const logger = new Logger('Plaid');
 const apiName = 'plaidapi';
 
-export default function Plaid({ plaidUserToken, setPlaidUserToken, plaidNumConnections, onSuccess }) {
+export default function Plaid({
+  plaidUserToken,
+  setPlaidUserToken,
+  plaidNumConnections,
+  onSuccess,
+}) {
   /**
    * The link needs to be rendered async.
    * This is because the user token must be set before showing anything.
@@ -83,5 +88,7 @@ export default function Plaid({ plaidUserToken, setPlaidUserToken, plaidNumConne
     }
   };
 
-  return showLink ? <PlaidLink token={linkToken} onSuccess={onLinkSuccess} /> : null;
+  return showLink ? (
+    <PlaidLink token={linkToken} onSuccess={onLinkSuccess} />
+  ) : null;
 }

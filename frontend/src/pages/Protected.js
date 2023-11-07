@@ -9,7 +9,7 @@ export default function Protected() {
   const { signOut } = useAuthenticator((context) => [
     context.route,
     context.signOut,
-    context.user
+    context.user,
   ]);
   const navigate = useNavigate();
 
@@ -18,14 +18,16 @@ export default function Protected() {
     navigate('/login');
   }
   return (
-    <Box sx={{
-      display: 'flex',
-      flexDirection: 'column',
-      paddingLeft: '20px'
-    }}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        paddingLeft: '20px',
+      }}
+    >
       <MenuDrawer props={logOut} />
       <Box
-        component="main"
+        component='main'
         sx={{
           flexGrow: 1,
           bgcolor: 'background.default',
@@ -33,18 +35,23 @@ export default function Protected() {
         }}
       >
         {/* Main Content */}
-        <Box sx={{
-          display: 'flex',
-          justifyContent: 'space-between'
-        }}>
-          <Typography 
+        <Box
           sx={{
-            marginLeft:'260px',
-            marginRight: '10%', 
-            fontSize: '28px',
-            fontWeight: 700,
-            }} 
-            variant='h5'>Client Table</Typography>
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Typography
+            sx={{
+              marginLeft: '260px',
+              marginRight: '10%',
+              fontSize: '28px',
+              fontWeight: 700,
+            }}
+            variant='h5'
+          >
+            Client Table
+          </Typography>
           <OnboardingFlow />
         </Box>
       </Box>

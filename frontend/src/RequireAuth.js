@@ -6,7 +6,7 @@ export default function RequireAuth({ children }) {
   const { route } = useAuthenticator((context) => [context.route]);
 
   if (route !== 'authenticated') {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to='/login' state={{ from: location }} replace />;
   }
 
   return children;

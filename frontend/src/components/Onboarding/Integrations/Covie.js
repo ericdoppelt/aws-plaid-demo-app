@@ -4,7 +4,6 @@ import { Logger } from 'aws-amplify';
 const logger = new Logger('Plaid');
 
 export default function Covie({ setCoviePolicies, onSuccess }) {
-
   const onLinkSuccess = (linkId, policies) => {
     setCoviePolicies(policies);
     onSuccess();

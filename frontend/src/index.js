@@ -23,7 +23,11 @@ try {
         region: process.env.REACT_APP_REGION,
         clientId: process.env.REACT_APP_COGNITO_CLIENT_ID,
         custom_header: async () => {
-          return { Authorization: `Bearer ${(await Auth.currentSession()).getAccessToken().getJwtToken()}` };
+          return {
+            Authorization: `Bearer ${(await Auth.currentSession())
+              .getAccessToken()
+              .getJwtToken()}`,
+          };
         },
       },
     ],
@@ -41,7 +45,11 @@ try {
       mandatorySignIn: true,
       oauth: {
         domain: process.env.REACT_APP_COGNITO_DOMAIN,
-        scope: ['email', 'openid', `${process.env.REACT_APP_BACKEND_URL}/plaid.rw}`],
+        scope: [
+          'email',
+          'openid',
+          `${process.env.REACT_APP_BACKEND_URL}/plaid.rw}`,
+        ],
         responseType: 'code',
       },
     },
@@ -53,7 +61,11 @@ try {
           region: process.env.REACT_APP_REGION,
           clientId: process.env.REACT_APP_COGNITO_CLIENT_ID,
           custom_header: async () => {
-            return { Authorization: `Bearer ${(await Auth.currentSession()).getAccessToken().getJwtToken()}` };
+            return {
+              Authorization: `Bearer ${(await Auth.currentSession())
+                .getAccessToken()
+                .getJwtToken()}`,
+            };
           },
         },
       ],

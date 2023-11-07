@@ -11,25 +11,25 @@ export default function EmailBanner({ email }) {
   const [open, setOpen] = useState(true);
 
   return (
-    <Snackbar 
+    <Snackbar
       anchorOrigin={{
         vertical: 'top',
-        horizontal: 'center'
+        horizontal: 'center',
       }}
-      open={open} 
-      >
+      open={open}
+    >
       <Alert
         action={
           <IconButton
-            aria-label="close"
-            color="inherit"
-            size="small"
+            aria-label='close'
+            color='inherit'
+            size='small'
             onClick={() => {
               setOpen(false);
             }}
-            severity="success"
+            severity='success'
           >
-            <CloseIcon fontSize="inherit" />
+            <CloseIcon fontSize='inherit' />
           </IconButton>
         }
         sx={{ mb: 2 }}

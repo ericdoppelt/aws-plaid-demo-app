@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Authenticator } from "@aws-amplify/ui-react";
+import { Authenticator } from '@aws-amplify/ui-react';
 import Protected from './pages/Protected';
 import Login from './pages/Login';
 import Layout from './components/Layout';
@@ -7,13 +7,12 @@ import RequireAuth from './RequireAuth';
 
 import './App.css';
 
-
 function App() {
   return (
     <Authenticator.Provider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path='/' element={<Layout />}>
             <Route
               index
               element={
@@ -22,7 +21,7 @@ function App() {
                 </RequireAuth>
               }
             />
-            <Route path="/login" element={<Login />} />
+            <Route path='/login' element={<Login />} />
           </Route>
         </Routes>
       </BrowserRouter>

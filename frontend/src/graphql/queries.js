@@ -1,4 +1,3 @@
-
 export const getItems = `query GetItems($limit: Int, $cursor: String) {
   getItems(limit: $limit, cursor: $cursor) {
     items {

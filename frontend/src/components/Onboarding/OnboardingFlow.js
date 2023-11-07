@@ -21,7 +21,9 @@ export default function OnboardingFlow() {
     Email: 'Email',
   };
 
-  const [currentOnboardingStep, setCurrentOnboardingStep] = useState(OnboardingSteps.Button);
+  const [currentOnboardingStep, setCurrentOnboardingStep] = useState(
+    OnboardingSteps.Button
+  );
 
   /**
    * The Plaid integration is determined by a few variables:
@@ -43,7 +45,11 @@ export default function OnboardingFlow() {
 
   // Define the four components needed for each step in the process.
   const FlowComponents = {
-    Button: <OnboardingButton onClick={() => setCurrentOnboardingStep(OnboardingSteps.Form)} />,
+    Button: (
+      <OnboardingButton
+        onClick={() => setCurrentOnboardingStep(OnboardingSteps.Form)}
+      />
+    ),
     Form: (
       <OnboardingForm
         plaidEnabled={plaidEnabled}

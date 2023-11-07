@@ -29,7 +29,7 @@ export default function OnboardingLink({
       Paystub: 'PaystubResults',
       Health: 'HealthResults',
       Auto: 'AutoResults',
-    }
+    },
   };
 
   const [currentLinkStep, setCurrentLinkStep] = useState(null);
@@ -62,29 +62,38 @@ export default function OnboardingLink({
         onSuccess={LinkSteps.Results.Health}
       />
     ),
-    PaystubResults: (<ResultsSplash onSuccess={() => {
-      setCurrentLinkStep(LinkSteps.Covie)
-    }}
-      onClose={onClose}
-      title='Paystubs'
-      type='Employment'
-      image='RocketHands.webp' />
+    PaystubResults: (
+      <ResultsSplash
+        onSuccess={() => {
+          setCurrentLinkStep(LinkSteps.Covie);
+        }}
+        onClose={onClose}
+        title='Paystubs'
+        type='Employment'
+        image='RocketHands.webp'
+      />
     ),
-    HealthResults: (<ResultsSplash onSuccess={() => {
-      setCurrentLinkStep(onSuccess)
-    }}
-      onClose={onClose}
-      title='Health Records'
-      type='Health Record'
-      image='Popper.webp' />
+    HealthResults: (
+      <ResultsSplash
+        onSuccess={() => {
+          setCurrentLinkStep(onSuccess);
+        }}
+        onClose={onClose}
+        title='Health Records'
+        type='Health Record'
+        image='Popper.webp'
+      />
     ),
-    AutoResults: (<ResultsSplash onSuccess={() => {
-      setCurrentLinkStep(null)
-    }}
-      onClose={onClose}
-      title='Auto Insurance'
-      type='Auto Insurance'
-      image='Award.webp' />
+    AutoResults: (
+      <ResultsSplash
+        onSuccess={() => {
+          setCurrentLinkStep(null);
+        }}
+        onClose={onClose}
+        title='Auto Insurance'
+        type='Auto Insurance'
+        image='Award.webp'
+      />
     ),
   };
 
