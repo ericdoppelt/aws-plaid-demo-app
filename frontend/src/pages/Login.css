@@ -15,7 +15,7 @@ ul {
   --amplify-border-widths-large: 0px;
 }
 
-button.amplify-button[type="submit"] {
+button.amplify-button[type='submit'] {
   background-color: #4c97f3;
   width: 33%;
   align-self: center;
@@ -43,7 +43,7 @@ input.amplify-input:focus {
   border: unset;
 }
 
-button.amplify-button[aria-label="Show password"] {
+button.amplify-button[aria-label='Show password'] {
   border: unset;
   background-color: #fafafa;
   border-bottom: 1px #bdbdbd solid;
@@ -60,11 +60,11 @@ button.amplify-button[aria-label="Show password"] {
   margin-top: 15%;
 }
 
-div[role="tablist"] {
+div[role='tablist'] {
   width: 100%;
 }
 
-div[role="tablist"] > div.amplify-flex {
+div[role='tablist'] > div.amplify-flex {
   width: 50%;
   margin: 0 auto;
   border: 1px #dcdee0 solid;
