@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { API, Logger } from 'aws-amplify';
 import PlaidLink from '../Components/PlaidLink';
 
@@ -34,10 +34,10 @@ export default function Plaid({
     if (userRequest) {
       sendUserRequest();
     }
-  }, [userRequest]);
+  }, [userRequest, sendUserRequest]);
 
   // Starts the Plaid connection: gets the user token and triggers the opening of a Plaid Link.
-  const sendUserRequest = async () => {
+  const sendUserRequest = useCallback(async () => {
     // Create the user token.
     try {
       // Get the POST response and log it.
@@ -51,17 +51,17 @@ export default function Plaid({
     }
     setUserRequest(false);
     setLinkRequest(true);
-  };
+  }, [setPlaidUserToken, setClientUserId, setUserRequest, setLinkRequest]);
 
   // If the link request variable is true, and the request params have been set, generate a new token.
   useEffect(() => {
     if (linkRequest && plaidUserToken && clientUserId) {
       sendLinkRequest();
     }
-  }, [linkRequest, plaidUserToken, clientUserId]);
+  }, [linkRequest, plaidUserToken, clientUserId, sendLinkRequest]);
 
   // Opens a Plaid link.
-  const sendLinkRequest = async () => {
+  const sendLinkRequest = useCallback(async () => {
     try {
       const res = await API.post(apiName, '/v1/tokens/plaid-link', {
         body: {
@@ -76,7 +76,7 @@ export default function Plaid({
     }
     setShowLink(true);
     setLinkRequest(false);
-  };
+  }, [setLinkToken, setShowLink, setLinkRequest, plaidUserToken, clientUserId]);
 
   // Determines whether a new plaid link should be created or the Plaid process is done.
   const onLinkSuccess = async () => {

@@ -12,7 +12,6 @@
   "rules": {
     "react/prop-types": "off",
     "react/no-unknown-property": "off",
-    "react-hooks/exhaustive-deps": "off",
     "no-unused-vars": [
       "warn",
       { "vars": "all", "args": "after-used", "argsIgnorePattern": "^_" }

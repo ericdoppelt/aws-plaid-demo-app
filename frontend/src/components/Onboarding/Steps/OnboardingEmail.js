@@ -21,36 +21,43 @@ export default function EmailGenerator({
 
   // When the form is submitted, open the link.
   useEffect(() => {
+    // Sends the POST request to generate the email.
+    const sendEmailRequest = async () => {
+      // Get the POST response and log it.
+      var requestBody = {
+        email: email,
+      };
+      if (plaidEnabled) {
+        requestBody['plaid_user_token'] = plaidUserToken;
+      }
+      if (covieEnabled) {
+        requestBody['covie_policies'] = coviePolicies;
+      }
+
+      try {
+        const res = await API.post(apiName, '/v1/tokens/send-email', {
+          body: requestBody,
+        });
+        logger.debug('POST /v1/tokens/send-email response:', res);
+        // Set user ID and token values asynchronously.
+      } catch (err) {
+        logger.error('Unable to create link token:', err);
+      }
+      setEmailRequest(false);
+      setShowBanner(true);
+    };
+
     if (emailRequest) {
       sendEmailRequest();
     }
-  }, [emailRequest]);
-
-  // Sends the POST request to generate the email.
-  const sendEmailRequest = async () => {
-    // Get the POST response and log it.
-    var requestBody = {
-      email: email,
-    };
-    if (plaidEnabled) {
-      requestBody['plaid_user_token'] = plaidUserToken;
-    }
-    if (covieEnabled) {
-      requestBody['covie_policies'] = coviePolicies;
-    }
-
-    try {
-      const res = await API.post(apiName, '/v1/tokens/send-email', {
-        body: requestBody,
-      });
-      logger.debug('POST /v1/tokens/send-email response:', res);
-      // Set user ID and token values asynchronously.
-    } catch (err) {
-      logger.error('Unable to create link token:', err);
-    }
-    setEmailRequest(false);
-    setShowBanner(true);
-  };
+  }, [
+    emailRequest,
+    covieEnabled,
+    coviePolicies,
+    email,
+    plaidEnabled,
+    plaidUserToken,
+  ]);
 
   return showBanner ? <EmailBanner email={email} /> : <div />;
 }
