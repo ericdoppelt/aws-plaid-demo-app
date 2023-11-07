@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { API, Logger } from 'aws-amplify';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import EmailBanner from '../Components/EmailBanner';

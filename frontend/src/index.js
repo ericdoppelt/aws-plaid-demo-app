@@ -1,8 +1,8 @@
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Amplify, Auth } from 'aws-amplify';
 import App from './App';
 
-import '@aws-amplify/ui-react/styles.css';
 import '@fontsource/inter/variable.css';
 import './index.css';
 
@@ -14,6 +14,7 @@ Amplify.Logger.LOG_LEVEL = 'DEBUG';
 // Try to dynamically import aws-exports
 var configuration;
 try {
+  //eslint-disable-next-line
   configuration = require('./aws-exports').default;
   configuration['API'] = {
     endpoints: [

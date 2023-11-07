@@ -15,8 +15,6 @@ import {
   ListItemText,
 } from '@mui/material';
 
-import OnboardingFlow from '../OnboardingFlow';
-
 const drawerWidth = 280;
 const user = {
   avatar: process.env.PUBLIC_URL + '/assets/images/avatar.png',

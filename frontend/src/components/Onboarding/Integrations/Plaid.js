@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { API, Logger } from 'aws-amplify';
 import PlaidLink from '../Components/PlaidLink';
 

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Logger } from 'aws-amplify';
 
+//eslint-disable-next-line
 const logger = new Logger('Plaid');
 
 export default function Covie({ setCoviePolicies, onSuccess }) {

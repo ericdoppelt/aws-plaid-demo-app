@@ -1,3 +1,4 @@
+import React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -76,7 +77,7 @@ export default function ResultsSplash({
               alignSelf: 'center',
             }}
           >
-            Select "Continue" to retrieve additional records
+            Select &quot;Continue&quot; to retrieve additional records
           </Typography>
         </Box>
         <DialogActions>

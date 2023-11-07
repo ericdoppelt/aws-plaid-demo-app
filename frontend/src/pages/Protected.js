@@ -1,8 +1,9 @@
+import React from 'react';
 import MenuDrawer from '../components/Onboarding/Components/MenuDrawer';
 import { useNavigate } from 'react-router-dom';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { Box } from '@mui/material';
-import { TextField, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import OnboardingFlow from '../components/Onboarding/OnboardingFlow';
 
 export default function Protected() {

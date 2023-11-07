@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import OnboardingForm from './Steps/OnboardingForm';
 import OnboardingLink from './Steps/OnboardingLink';
 import OnboardingEmail from './Steps/OnboardingEmail';
 import OnboardingButton from './Steps/OnboardingButton';
-import ResultsSplash from './Steps/ResultsSplash';
 
 export default function OnboardingFlow() {
   /**
