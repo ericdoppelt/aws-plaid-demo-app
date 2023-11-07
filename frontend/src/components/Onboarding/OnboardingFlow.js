@@ -19,9 +19,6 @@ export default function OnboardingFlow() {
     Form: 'Form',
     Link: 'Link',
     Email: 'Email',
-    Results: {
-      Auto: 'AutoResults',
-    },
   };
 
   const [currentOnboardingStep, setCurrentOnboardingStep] = useState(OnboardingSteps.Button);
@@ -79,14 +76,6 @@ export default function OnboardingFlow() {
         covieEnabled={covieEnabled}
         coviePolicies={coviePolicies}
       />
-    ),
-    AutoResults: (<ResultsSplash onSuccess={() => {
-      setCurrentOnboardingStep(OnboardingSteps.Button)
-    }}
-      onClose={() => { setCurrentOnboardingStep(OnboardingSteps.Button) }}
-      title='Auto Insurance'
-      type='Auto Insurance'
-      image='Award.webp' />
     ),
   };
 

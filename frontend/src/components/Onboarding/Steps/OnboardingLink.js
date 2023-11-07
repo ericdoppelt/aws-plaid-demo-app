@@ -25,9 +25,10 @@ export default function OnboardingLink({
   const LinkSteps = {
     Plaid: 'Plaid',
     Covie: 'Covie',
-    results: {
+    Results: {
       Paystub: 'PaystubResults',
       Health: 'HealthResults',
+      Auto: 'AutoResults',
     }
   };
 
@@ -51,14 +52,14 @@ export default function OnboardingLink({
         setPlaidUserToken={setPlaidUserToken}
         plaidNumConnections={plaidNumConnections}
         onClose={onClose}
-        onSuccess={() => setCurrentLinkStep(LinkSteps.results.Paystub)}
+        onSuccess={() => setCurrentLinkStep(LinkSteps.Results.Paystub)}
       />
     ),
     Covie: (
       <Covie
         setCovieToggle={setCovieEnabled}
         setCoviePolicies={setCoviePolicies}
-        onSuccess={LinkSteps.results.Health}
+        onSuccess={LinkSteps.Results.Health}
       />
     ),
     PaystubResults: (<ResultsSplash onSuccess={() => {
@@ -76,6 +77,14 @@ export default function OnboardingLink({
       title='Health Records'
       type='Health Record'
       image='Popper.webp' />
+    ),
+    AutoResults: (<ResultsSplash onSuccess={() => {
+      setCurrentLinkStep(null)
+    }}
+      onClose={onClose}
+      title='Auto Insurance'
+      type='Auto Insurance'
+      image='Award.webp' />
     ),
   };
 
