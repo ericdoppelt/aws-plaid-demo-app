@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import OnboardingForm from './Steps/OnboardingForm';
 import OnboardingLink from './Steps/OnboardingLink';
 import OnboardingEmail from './Steps/OnboardingEmail';
@@ -20,8 +20,6 @@ export default function OnboardingFlow() {
     Link: 'Link',
     Email: 'Email',
     Results: {
-      Paystub: 'PaystubResults',
-      Health: 'HealthResults',
       Auto: 'AutoResults',
     },
   };
@@ -81,22 +79,6 @@ export default function OnboardingFlow() {
         covieEnabled={covieEnabled}
         coviePolicies={coviePolicies}
       />
-    ),
-    PaystubResults: (<ResultsSplash onSuccess={() => {
-      setCurrentOnboardingStep(OnboardingSteps.Button)
-    }}
-      onClose={() => { setCurrentOnboardingStep(OnboardingSteps.Button) }}
-      title='Paystubs'
-      type='Employment'
-      image='RocketHands.webp' />
-    ),
-    HealthResults: (<ResultsSplash onSuccess={() => {
-      setCurrentOnboardingStep(OnboardingSteps.Button)
-    }}
-      onClose={() => { setCurrentOnboardingStep(OnboardingSteps.Button) }}
-      title='Health Records'
-      type='Health Record'
-      image='Popper.webp' />
     ),
     AutoResults: (<ResultsSplash onSuccess={() => {
       setCurrentOnboardingStep(OnboardingSteps.Button)

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 import Plaid from '../Integrations/Plaid';
 import Covie from '../Integrations/Covie';
+import ResultsSplash from './ResultsSplash';
 
 export default function OnboardingLink({
   plaidEnabled,
@@ -24,6 +25,10 @@ export default function OnboardingLink({
   const LinkSteps = {
     Plaid: 'Plaid',
     Covie: 'Covie',
+    results: {
+      Paystub: 'PaystubResults',
+      Health: 'HealthResults',
+    }
   };
 
   const [currentLinkStep, setCurrentLinkStep] = useState(null);
@@ -46,15 +51,31 @@ export default function OnboardingLink({
         setPlaidUserToken={setPlaidUserToken}
         plaidNumConnections={plaidNumConnections}
         onClose={onClose}
-        onSuccess={() => setCurrentLinkStep(LinkSteps.Covie)}
+        onSuccess={() => setCurrentLinkStep(LinkSteps.results.Paystub)}
       />
     ),
     Covie: (
       <Covie
         setCovieToggle={setCovieEnabled}
         setCoviePolicies={setCoviePolicies}
-        onSuccess={onSuccess}
+        onSuccess={LinkSteps.results.Health}
       />
+    ),
+    PaystubResults: (<ResultsSplash onSuccess={() => {
+      setCurrentLinkStep(LinkSteps.Covie)
+    }}
+      onClose={onClose}
+      title='Paystubs'
+      type='Employment'
+      image='RocketHands.webp' />
+    ),
+    HealthResults: (<ResultsSplash onSuccess={() => {
+      setCurrentLinkStep(onSuccess)
+    }}
+      onClose={onClose}
+      title='Health Records'
+      type='Health Record'
+      image='Popper.webp' />
     ),
   };
 
