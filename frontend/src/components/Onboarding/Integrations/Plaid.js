@@ -29,13 +29,6 @@ export default function Plaid({
   const [linkRequest, setLinkRequest] = useState(false);
   const [numLinksLeft, setNumLinksLeft] = useState(plaidNumConnections);
 
-  // If the user request variable is true, generate a new token.
-  useEffect(() => {
-    if (userRequest) {
-      sendUserRequest();
-    }
-  }, [userRequest, sendUserRequest]);
-
   // Starts the Plaid connection: gets the user token and triggers the opening of a Plaid Link.
   const sendUserRequest = useCallback(async () => {
     // Create the user token.
@@ -53,12 +46,12 @@ export default function Plaid({
     setLinkRequest(true);
   }, [setPlaidUserToken, setClientUserId, setUserRequest, setLinkRequest]);
 
-  // If the link request variable is true, and the request params have been set, generate a new token.
+  // If the user request variable is true, generate a new token.
   useEffect(() => {
-    if (linkRequest && plaidUserToken && clientUserId) {
-      sendLinkRequest();
+    if (userRequest) {
+      sendUserRequest();
     }
-  }, [linkRequest, plaidUserToken, clientUserId, sendLinkRequest]);
+  }, [userRequest, sendUserRequest]);
 
   // Opens a Plaid link.
   const sendLinkRequest = useCallback(async () => {
@@ -77,6 +70,14 @@ export default function Plaid({
     setShowLink(true);
     setLinkRequest(false);
   }, [setLinkToken, setShowLink, setLinkRequest, plaidUserToken, clientUserId]);
+
+  // If the link request variable is true, and the request params have been set, generate a new token.
+  useEffect(() => {
+    if (linkRequest && plaidUserToken && clientUserId) {
+      sendLinkRequest();
+    }
+  }, [linkRequest, plaidUserToken, clientUserId, sendLinkRequest]);
+
 
   // Determines whether a new plaid link should be created or the Plaid process is done.
   const onLinkSuccess = async () => {
