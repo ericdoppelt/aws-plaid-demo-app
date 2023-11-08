@@ -2,9 +2,12 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Amplify, Auth } from 'aws-amplify';
 import App from './App';
-
 import '@fontsource/inter/variable.css';
 import './index.css';
+
+// Remote Import, disabling eslint for build
+//eslint-disable-next-line
+import '@aws-amplify/ui-react/styles.css';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
