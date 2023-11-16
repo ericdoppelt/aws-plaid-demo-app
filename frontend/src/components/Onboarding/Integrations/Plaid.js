@@ -78,7 +78,6 @@ export default function Plaid({
     }
   }, [linkRequest, plaidUserToken, clientUserId, sendLinkRequest]);
 
-
   // Determines whether a new plaid link should be created or the Plaid process is done.
   const onLinkSuccess = async () => {
     if (numLinksLeft == 1) {
